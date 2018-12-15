@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
+<h1>
+  My Favorites Paintings' Location & Street View
+</h1>
 
-<h1>Arts</h1>
+<h2>Paintings</h2>
 
 <table>
   <thead>
     <tr>
-      <th>Artist</th>
       <th>Title</th>
       <th>Year</th>
+      <th>Artist</th>
+      <th>Country</th>
+      <th>Birth & Death</th>
       <th>Image url</th>
       <th>Location url</th>
       <th>View url</th>
@@ -18,9 +23,11 @@
   <tbody>
     <% @arts.each do |art| %>
       <tr>
-        <td><%= link_to art.artist.name, artist_path(art.artist) %></td>
         <td><%= art.title %></td>
         <td><%= art.year %></td>
+        <td><%= link_to art.artist.name, artist_path(art.artist) %></td>
+        <td><%= art.artist.country %></td>
+        <td><%= art.artist.birth %> - <%= art.artist.death %></td>
         <td><%= link_to "Google Arts & Culture", art.image_url, :target=>["_blank"] %></td>
         <td><%= link_to "Location", art.location_url, :target=>["_blank"] %></td>
         <td><%= link_to "Street View", art.view_url, :target=>["_blank"] %></td>

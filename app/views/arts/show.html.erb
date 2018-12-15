@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Artist:</strong>
-  <%= @art.artist %>
-</p>
+
 
 <p>
   <strong>Title:</strong>
@@ -16,18 +13,33 @@
 </p>
 
 <p>
+  <strong>Artist:</strong>
+  <%= link_to @art.artist.name, artist_path(@art.artist) %>
+</p>
+
+<p>
+  <strong>From</strong>
+  <%= @art.artist.country %>
+</p>
+
+<p>
+  <strong>生没年</strong>
+  <%= @art.artist.birth %> - <%= @art.artist.death %>
+</p>
+
+<p>
   <strong>Image url:</strong>
-  <%= @art.image_url %>
+  <%= link_to "Google Arts & Culture", @art.image_url, :target=>["_blank"] %>
 </p>
 
 <p>
   <strong>Location url:</strong>
-  <%= @art.location_url %>
+  <%= link_to "Location", @art.location_url, :target=>["_blank"] %>
 </p>
 
 <p>
   <strong>View url:</strong>
-  <%= @art.view_url %>
+  <%= link_to "Street View", @art.view_url, :target=>["_blank"] %>
 </p>
 
 <%= link_to 'Edit', edit_art_path(@art) %> |
