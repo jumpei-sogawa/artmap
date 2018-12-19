@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <h1>
-  My Favorites Paintings' Location & Street View
+  My Favorite Paintings' Location & Street View
 </h1>
 
 <h2>Paintings</h2>
@@ -13,6 +13,7 @@
       <th>Artist</th>
       <th>Country</th>
       <th>Birth & Death</th>
+      <th>Image</th>
       <th>Image url</th>
       <th>Location url</th>
       <th>View url</th>
@@ -28,6 +29,7 @@
         <td><%= link_to art.artist.name, artist_path(art.artist) %></td>
         <td><%= art.artist.country %></td>
         <td><%= art.artist.birth %> - <%= art.artist.death %></td>
+        <td><%= image_tag art.image.to_s %></td>
         <td><%= link_to "Google Arts & Culture", art.image_url, :target=>["_blank"] %></td>
         <td><%= link_to "Location", art.location_url, :target=>["_blank"] %></td>
         <td><%= link_to "Street View", art.view_url, :target=>["_blank"] %></td>
