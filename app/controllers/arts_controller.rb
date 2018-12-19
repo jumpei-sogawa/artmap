@@ -10,6 +10,10 @@ class ArtsController < ApplicationController
   # GET /arts/1
   # GET /arts/1.json
   def show
+    # @art = Map.find_by(id: params[:id])
+    @address = @art.address
+    @latitude = @art.latitude
+    @longitude = @art.longitude
   end
 
   # GET /arts/new
@@ -69,6 +73,6 @@ class ArtsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def art_params
-      params.require(:art).permit(:artist_id, :title, :year, :image, :image_url, :location_url, :view_url)
+      params.require(:art).permit(:artist_id, :title, :year, :image_url, :image, :location_url, :address, :view_url)
     end
 end
