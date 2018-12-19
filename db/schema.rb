@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_12_15_202814) do
     t.integer "artist_id"
     t.string "title"
     t.integer "year"
+    t.string "image"
     t.string "image_url"
     t.string "location_url"
     t.string "view_url"
