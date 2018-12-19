@@ -5,6 +5,14 @@ class ArtsController < ApplicationController
   # GET /arts.json
   def index
     @arts = Art.all
+    @addresses = []
+    @latitudes = []
+    @longitudes = []
+    @arts.each do |art|
+      @addresses << art.address
+      @latitudes << art.latitude
+      @longitudes << art.longitude
+    end
   end
 
   # GET /arts/1
