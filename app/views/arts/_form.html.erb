@@ -13,8 +13,10 @@
 
   <div class="field">
     <%= form.label :artist_id %>
-    <%= form.text_field :artist_id %>
+    <%= form.select :artist_id, @artists.map{|artist| [artist.name, artist.id]} %>
   </div>
+
+  <%= link_to 'New Artist', new_artist_path %>
 
   <div class="field">
     <%= form.label :title %>

@@ -27,10 +27,12 @@ class ArtsController < ApplicationController
   # GET /arts/new
   def new
     @art = Art.new
+    @artists = Artist.all
   end
 
   # GET /arts/1/edit
   def edit
+    @artists = Artist.all
   end
 
   # POST /arts
