@@ -25,13 +25,13 @@ ActiveRecord::Schema.define(version: 2018_12_15_202814) do
     t.integer "artist_id"
     t.string "title"
     t.integer "year"
-    t.string "image_url"
+    t.string "image_link"
     t.string "image"
-    t.string "location_url"
+    t.string "location_link"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
-    t.string "view_url"
+    t.string "view_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_arts_on_artist_id"
