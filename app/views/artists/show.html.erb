@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @artist.name %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @artist.country %>
+</p>
+
+<p>
+  <strong>Birth:</strong>
+  <%= @artist.birth %>
+</p>
+
+<p>
+  <strong>Death:</strong>
+  <%= @artist.death %>
+</p>
+
+<p>
+  <strong>作品一覧</strong>
+</p>
+<p>
+  <% @artist.arts.each do |art| %>
+    <strong><%= link_to art.title, art_path(art) %></strong> <br>
+    <%= art.year %> <br>
+    <%= link_to "Google Arts & Culture", art.image_url, :target=>["_blank"] %> <br>
+    <%= link_to "Location", art.location_url, :target=>["_blank"] %> <br>
+    <%= link_to "Street View", art.view_url, :target=>["_blank"] %> <br>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_artist_path(@artist) %> |
+<%= link_to 'Back', artists_path %>

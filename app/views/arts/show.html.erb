@@ -1,0 +1,101 @@
+<script type="text/javascript">
+    function initMap() {
+
+        var test ={lat: <%= @latitude %>, lng: <%= @longitude %>};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: test
+        });
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+
+        var contentString = 'Address: <%= @address %>';
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+            position:test,
+            map: map,
+            title: contentString
+        });
+
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap">
+</script>
+
+<p id="notice"><%= notice %></p>
+
+
+
+<p>
+  <strong>Title:</strong>
+  <%= @art.title %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @art.year %>
+</p>
+
+<p>
+  <strong>Artist:</strong>
+  <%= link_to @art.artist.name, artist_path(@art.artist) %>
+</p>
+
+<p>
+  <strong>From</strong>
+  <%= @art.artist.country %>
+</p>
+
+<p>
+  <strong>生没年</strong>
+  <%= @art.artist.birth %> - <%= @art.artist.death %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= link_to "Google Arts & Culture", @art.image_url, :target=>["_blank"] %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @art.image.to_s %>
+</p>
+
+<p>
+  <strong>Location url:</strong>
+  <%= link_to "Location", @art.location_url, :target=>["_blank"] %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @art.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @art.longitude %>
+</p>
+
+<p>
+  <strong>View url:</strong>
+  <%= link_to "Street View", @art.view_url, :target=>["_blank"] %>
+</p>
+
+<style type="text/css">
+  #map { height: 400px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:left;
+    width: 80%;}
+</style>
+<div id="map"></div>
+
+<%= link_to 'Edit', edit_art_path(@art) %> |
+<%= link_to 'Back', arts_path %>
