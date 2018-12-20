@@ -60,12 +60,12 @@
     <%= link_to art.artist.name, artist_path(art.artist) %> <br>
     <%= art.artist.country %> <br>
     <%= art.artist.birth %> - <%= art.artist.death %> <br>
-    <%= link_to "Google Arts & Culture", art.image_url, :target=>["_blank"] %> <br>
-    <%= link_to "Location", art.location_url, :target=>["_blank"] %> <br>
+    <%= link_to "Google Arts & Culture", art.image_link, :target=>["_blank"] %> <br>
+    <%= link_to "Location", art.location_link, :target=>["_blank"] %> <br>
     <%= art.address %> <br>
     <%= art.latitude %> <br>
     <%= art.longitude %> <br>
-    <%= link_to "Street View", art.view_url, :target=>["_blank"] %> <br>
+    <%= link_to "Street View", art.view_link, :target=>["_blank"] %> <br>
     <%= link_to 'Show', art %> <br>
     <%= link_to 'Edit', edit_art_path(art) %> <br>
     <%= link_to 'Destroy', art, method: :delete, data: { confirm: 'Are you sure?' } %> <br>
