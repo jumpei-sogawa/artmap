@@ -27,10 +27,12 @@ class ArtsController < ApplicationController
   # GET /arts/new
   def new
     @art = Art.new
+    @artists = Artist.all
   end
 
   # GET /arts/1/edit
   def edit
+    @artists = Artist.all
   end
 
   # POST /arts
@@ -81,6 +83,6 @@ class ArtsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def art_params
-      params.require(:art).permit(:artist_id, :title, :year, :image_url, :image, :location_url, :address, :view_url)
+      params.require(:art).permit(:artist_id, :title, :year, :image_link, :image, :location_link, :address, :view_link)
     end
 end

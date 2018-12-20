@@ -13,8 +13,10 @@
 
   <div class="field">
     <%= form.label :artist_id %>
-    <%= form.text_field :artist_id %>
+    <%= form.select :artist_id, @artists.map{|artist| [artist.name, artist.id]} %>
   </div>
+
+  <%= link_to 'New Artist', new_artist_path %>
 
   <div class="field">
     <%= form.label :title %>
@@ -27,8 +29,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :image_url %>
-    <%= form.text_field :image_url %>
+    <%= form.label :image_link %>
+    <%= form.text_field :image_link %>
   </div>
 
   <div class="field">
@@ -37,8 +39,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :location_url %>
-    <%= form.text_field :location_url %>
+    <%= form.label :location_link %>
+    <%= form.text_field :location_link %>
   </div>
 
   <div class="field">
@@ -47,8 +49,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :view_url %>
-    <%= form.text_field :view_url %>
+    <%= form.label :view_link %>
+    <%= form.text_field :view_link %>
   </div>
 
   <div class="actions">
