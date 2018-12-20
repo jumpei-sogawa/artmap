@@ -32,6 +32,10 @@
 <p id="notice"><%= notice %></p>
 
 
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @art.image.to_s %>
+</p>
 
 <p>
   <strong>Title:</strong>
@@ -61,11 +65,6 @@
 <p>
   <strong>Image url:</strong>
   <%= link_to "Google Arts & Culture", @art.image_url, :target=>["_blank"] %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @art.image.to_s %>
 </p>
 
 <p>

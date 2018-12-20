@@ -20,16 +20,20 @@
   <%= @artist.death %>
 </p>
 
+<br>
+
 <p>
   <strong>作品一覧</strong>
 </p>
 <p>
   <% @artist.arts.each do |art| %>
+    <%= image_tag art.image.to_s %> <br>
     <strong><%= link_to art.title, art_path(art) %></strong> <br>
     <%= art.year %> <br>
     <%= link_to "Google Arts & Culture", art.image_url, :target=>["_blank"] %> <br>
     <%= link_to "Location", art.location_url, :target=>["_blank"] %> <br>
     <%= link_to "Street View", art.view_url, :target=>["_blank"] %> <br>
+    <br>
   <% end %>
 </p>
 
