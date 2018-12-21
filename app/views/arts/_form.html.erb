@@ -1,59 +1,92 @@
-<%= form_with(model: art, local: true) do |form| %>
-  <% if art.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(art.errors.count, "error") %> prohibited this art from being saved:</h2>
+<div class="container-fluid">
+  <%= form_with(model: art, local: true, class: "needs-validation") do |form| %>
+    <% if art.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(art.errors.count, "error") %> prohibited this art from being saved:</h2>
 
-      <ul>
-      <% art.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% art.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :title %>
+      </div>
+      <div class="col-lg-3">
+        <%= form.text_field :title, class: "form-control" %>
+      </div>
+      <div class="col-lg-1">
+        <%= form.label :year %>
+      </div>
+      <div class="col-lg-2">
+        <%= form.number_field :year, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :artist_id %>
+      </div>
+      <div class="col-lg-2">
+        <%= form.select :artist_id, @artists.map{|artist| [artist.name, artist.id]}, class: "form-control" %>
+      </div>
+      <%= link_to 'New Artist', new_artist_path, class: "col-lg-1", style: "text-decoration:none;" %>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :image %>
+      </div>
+      <div class="col-lg-6">
+        <%= form.file_field :image %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :image_link %>
+      </div>
+      <div class="col-lg-6">
+        <%= form.text_field :image_link, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :location_link %>
+      </div>
+      <div class="col-lg-6">
+        <%= form.text_field :location_link, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :address %>
+      </div>
+      <div class="col-lg-6">
+        <%= form.text_field :address, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :view_link %>
+      </div>
+      <div class="col-lg-6">
+        <%= form.text_field :view_link, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-6 offset-lg-3">
+        <%= form.submit class: "col-lg-2 btn btn-outline-primary" %>
+        <%= link_to 'Back', arts_path, class: "col-lg-2 btn btn-outline-secondary", style: "text-decoration:none;" %>
+      </div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :artist_id %>
-    <%= form.select :artist_id, @artists.map{|artist| [artist.name, artist.id]} %>
-  </div>
-
-  <%= link_to 'New Artist', new_artist_path %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :year %>
-    <%= form.number_field :year %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image_link %>
-    <%= form.text_field :image_link %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
-
-  <div class="field">
-    <%= form.label :location_link %>
-    <%= form.text_field :location_link %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :view_link %>
-    <%= form.text_field :view_link %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
