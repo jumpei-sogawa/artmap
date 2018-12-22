@@ -1,56 +1,58 @@
-<%= form_with(model: artist, local: true) do |form| %>
-  <% if artist.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+<div class="container-fluid">
+  <%= form_with(model: artist, local: true) do |form| %>
+    <% if artist.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
 
-      <ul>
-      <% artist.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% artist.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :name %>
+      </div>
+      <div class="col-lg-3">
+        <%= form.text_field :name %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :country %>
+      </div>
+      <div class="col-lg-3">
+      <%= form.text_field :country %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :birth %>
+      </div>
+      <div class="col-lg-3">
+      <%= form.text_field :birth %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :death %>
+      </div>
+      <div class="col-lg-3">
+      <%= form.text_field :death %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-6 offset-lg-3">
+        <%= form.submit class: "col-lg-2 btn btn-outline-primary" %>
+        <%= link_to 'Back', new_art_path, class: "col-lg-2 btn btn-outline-secondary", style: "text-decoration:none;" %>
+      </div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :country %>
-    <%= form.text_field :country %>
-  </div>
-
-  <div class="field">
-    <%= form.label :birth %>
-    <%= form.text_field :birth %>
-  </div>
-
-  <div class="field">
-    <%= form.label :death %>
-    <%= form.text_field :death %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
-<br>
-<%= simple_form_for @artist,
-  wrapper: :horizontal_form,
-  wrapper_mappings: {
-    boolean:       :horizontal_boolean,
-    check_boxes:   :horizontal_collection,
-    date:          :horizontal_multi_select,
-    datetime:      :horizontal_multi_select,
-    file:          :horizontal_file,
-    radio_buttons: :horizontal_collection,
-    range:         :horizontal_range,
-    time:          :horizontal_multi_select
-  } do |f| %>
-  <%= f.input :name %>
-  <%= f.input :country, as: :string %>
-  <%= f.input :birth %>
-  <%= f.input :death %>
-  <%= f.button :submit %>
-<% end %>
+</div>
