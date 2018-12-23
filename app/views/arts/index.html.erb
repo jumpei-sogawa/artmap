@@ -32,9 +32,19 @@
               title: contentString
           });
 
-          marker.addListener('click', function() { // マーカーをクリックしたとき
-            infoWindow.open(map, marker); // 吹き出しの表示
-          });
+          //ON
+          marker.addListener('mouseover', () => {
+            infoWindow.open(map, marker);
+          }, false);
+
+          // marker.addListener('click', () => { // マーカーをクリックしたとき
+
+          // }, false);
+
+          //OUT
+          marker.addListener('mouseout', () => {
+            infoWindow.close();
+          }, false);
         <% end %>
         <% end %>
         <% end %>
