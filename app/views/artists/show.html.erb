@@ -5,10 +5,10 @@
   var marker;
   function initMap() {
 
-      var cecnter = {lat: <%= @arts.average(:latitude) %>, lng: <%= @arts.average(:longitude) %>};
+      var center = {lat: <%= @arts.average(:latitude) %>, lng: <%= @arts.average(:longitude) %>};
       var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 6,
-          center: cecnter
+          center: center
       });
       var transitLayer = new google.maps.TransitLayer();
       transitLayer.setMap(map);
@@ -97,7 +97,7 @@
 
 <div class="container">
   <div class="row">
-    <%= link_to 'New Art', new_art_path, class: "col-lg-12", class: "btn btn-outline-primary", style: "margin: 0 auto;" %>
+    <%= link_to 'Post Painting', new_art_path, class: "col-lg-12", class: "btn btn-outline-primary", style: "margin: 0 auto;" %>
   </div>
 </div>
 <br>
@@ -141,7 +141,7 @@
 
 <div class="container">
   <div class="row">
-    <%= link_to 'New Art', new_art_path, class: "col-lg-12", class: "btn btn-outline-primary", style: "margin: 0 auto;" %>
+    <%= link_to 'Post Painting', new_art_path, class: "col-lg-12", class: "btn btn-outline-primary", style: "margin: 0 auto;" %>
   </div>
 </div>
 <br>

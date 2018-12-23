@@ -30,7 +30,7 @@ class ArtistsController < ApplicationController
 
     respond_to do |format|
       if @artist.save
-        format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
+        format.html { redirect_to new_art_path, notice: 'Artist was successfully created.' }
         format.json { render :show, status: :created, location: @artist }
       else
         format.html { render :new }
