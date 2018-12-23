@@ -5,10 +5,10 @@
   var marker;
   function initMap() {
 
-      var cecnter = {lat: <%= @arts.average(:latitude) %>, lng: <%= @arts.average(:longitude) %>};
+      var center = {lat: <%= @arts.average(:latitude) %>, lng: <%= @arts.average(:longitude) %>};
       var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 6,
-          center: cecnter
+          center: center
       });
       var transitLayer = new google.maps.TransitLayer();
       transitLayer.setMap(map);
