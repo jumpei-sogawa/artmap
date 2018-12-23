@@ -17,7 +17,7 @@
         <% unless art.address == '' %>
         <% unless art.latitude == 'nil' %>
         <% unless art.longitude == 'nil' %>
-          contentString = '<%= art.address %>';
+          contentString = '<%= art.title %>, <%= art.artist.name %>';
           infoWindow = new google.maps.InfoWindow({
               content: contentString
           });
@@ -54,24 +54,51 @@
 
 <div class="container-fluid" style="width:90%;">
   <div class="row">
-    <div class="col-lg-9" style="font-size:30px;">
+    <div class="col-lg-12" style="font-size:30px;">
       My Favorite Paintings' Location & Street View
     </div>
-    <%= link_to 'New Art', new_art_path, class: "col-lg-1 offset-lg-2 btn btn-outline-primary", style: "width:100px;" %>
+  </div>
 
+  <br>
 
+  <div class="row">
+    <div class="btn-group col-sm-3">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        All Artists
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% @artists.each do |artist| %>
+          <%= link_to artist.name, artist_path(artist), class: "dropdown-item" %>
+        <% end %>
+        <div class="dropdown-divider"></div>
+        <%= link_to "All Artists", root_path, class: "dropdown-item" %>
+      </div>
+    </div>
+  </div>
 
-    <style type="text/css">
-      #map { height: 400px;
-        margin-left:auto;
-        margin-right:auto;
-        margin-top:20px;
-        margin-bottom:40px;
-        text-align:left;
-        width: 100%;}
-    </style>
+  <style type="text/css">
+    #map { height: 400px;
+      margin-left:auto;
+      margin-right:auto;
+      margin-top:20px;
+      margin-bottom:40px;
+      text-align:left;
+      width: 100%;}
+  </style>
+  <div class="row">
     <div id="map"></div>
+  </div>
+</div>
 
+<div class="container">
+  <div class="row">
+    <%= link_to 'New Art', new_art_path, class: "col-lg-12", class: "btn btn-outline-primary", style: "margin: 0 auto;" %>
+  </div>
+</div>
+<br>
+
+<div class="container-fluid" style="width:90%;">
+  <div class="row">
     <% @arts.each do |art| %>
       <div class="col-lg-4">
         <div class="card mb-4 shadow-sm">
