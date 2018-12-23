@@ -34,7 +34,7 @@
       <div class="col-lg-2">
         <%= form.select :artist_id, @artists.map{|artist| [artist.name, artist.id]}, class: "form-control" %>
       </div>
-      <%= link_to 'New Artist', new_artist_path, class: "col-lg-1", style: "text-decoration:none;" %>
+      <%= link_to 'Add Artist', new_artist_path, class: "col-lg-1", style: "text-decoration:none;" %>
     </div>
 
     <div class="form-group row">
@@ -84,7 +84,7 @@
 
     <div class="form-group row">
       <div class="col-lg-6 offset-lg-3">
-        <%= form.submit class: "col-lg-2 btn btn-outline-primary" %>
+        <%= form.submit "Post", class: "col-lg-2 btn btn-outline-primary" %>
         <%= link_to 'Home', arts_path, class: "col-lg-2 btn btn-outline-secondary", style: "text-decoration:none;" %>
       </div>
     </div>
