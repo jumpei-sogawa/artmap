@@ -1,41 +1,151 @@
+<script type="text/javascript">
+  var contentString;
+  var infoWindow;
+  var position;
+  var marker;
+  function initMap() {
+
+      var cecnter = {lat: <%= @arts.average(:latitude) %>, lng: <%= @arts.average(:longitude) %>};
+      var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 6,
+          center: cecnter
+      });
+      var transitLayer = new google.maps.TransitLayer();
+      transitLayer.setMap(map);
+
+      <% @arts.each do |art| %>
+        <% unless art.address == '' %>
+        <% unless art.latitude == 'nil' %>
+        <% unless art.longitude == 'nil' %>
+          contentString = '<%= art.title %>, <%= art.artist.name %>';
+          infoWindow = new google.maps.InfoWindow({
+              content: contentString
+          });
+
+          position = {
+            lat: <%= art.latitude %>,
+            lng: <%= art.longitude %>
+          }
+          marker = new google.maps.Marker({
+              position:position,
+              map: map,
+              title: contentString
+          });
+
+          marker.addListener('click', function() { // マーカーをクリックしたとき
+            infoWindow.open(map, marker); // 吹き出しの表示
+          });
+        <% end %>
+        <% end %>
+        <% end %>
+      <% end %>
+  }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap">
+</script>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @artist.name %>
-</p>
+<div class="container-fluid" style="width:90%;">
+  <div class="row">
+    <div class="col-lg-12" style="font-size:30px;">
+      My Favorite Paintings' Location & Street View
+    </div>
+  </div>
 
-<p>
-  <strong>Country:</strong>
-  <%= @artist.country %>
-</p>
+  <br>
 
-<p>
-  <strong>Birth:</strong>
-  <%= @artist.birth %>
-</p>
 
-<p>
-  <strong>Death:</strong>
-  <%= @artist.death %>
-</p>
 
+  <div class="row">
+    <div class="btn-group col-sm-3">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= @artist.name %>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <% @artists.each do |artist| %>
+          <%= link_to artist.name, artist_path(artist), class: "dropdown-item" %>
+        <% end %>
+        <div class="dropdown-divider"></div>
+        <%= link_to "All Artists", root_path, class: "dropdown-item" %>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <%= @artist.country %>
+    </div>
+
+    <div class="col-sm-3">
+      <%= @artist.birth %> - <%= @artist.death %>
+    </div>
+  </div>
+
+  <style type="text/css">
+    #map { height: 400px;
+      margin-left:auto;
+      margin-right:auto;
+      margin-top:20px;
+      margin-bottom:40px;
+      text-align:left;
+      width: 100%;}
+    </style>
+  <div class="row">
+    <div id="map" class="col-lg-12"></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <%= link_to 'New Art', new_art_path, class: "col-lg-12", class: "btn btn-outline-primary", style: "margin: 0 auto;" %>
+  </div>
+</div>
 <br>
 
-<p>
-  <strong>作品一覧</strong>
-</p>
-<p>
-  <% @artist.arts.each do |art| %>
-    <%= image_tag art.image.to_s %> <br>
-    <strong><%= link_to art.title, art_path(art) %></strong> <br>
-    <%= art.year %> <br>
-    <%= link_to "Google Arts & Culture", art.image_link, :target=>["_blank"] %> <br>
-    <%= link_to "Location", art.location_link, :target=>["_blank"] %> <br>
-    <%= link_to "Street View", art.view_link, :target=>["_blank"] %> <br>
-    <br>
-  <% end %>
-</p>
+<div class="container-fluid" style="width:90%;">
+  <div class="row">
+    <% @arts.each do |art| %>
+      <div class="col-lg-4">
+        <div class="card mb-4 shadow-sm">
+          <%= link_to art, style: "background-color: white;" do %>
+            <%= image_tag art.image.to_s, class: "card-img-top" %>
+          <% end %>
+          <div class="card-body">
+            <div class="card-text" style="font-size:25px;">
+              <%= link_to art.title, art, style: "text-decoration: none;" %>
+            </div>
+            <div class="card-text"><%= art.year %></div>
+            <div class="card-text" style="font-size:20px;margin-top:5px;">
+              <%= link_to art.artist.name, artist_path(art.artist), style: "text-decoration: none;" %>
+            </div>
+            <div class="card-text" style="margin-bottom:10px;">
+              <%= art.artist.country %>, <%= art.artist.birth %> - <%= art.artist.death %>
+            </div>
+            <%= link_to "Image", art.image_link, :target=>["_blank"], style: "text-decoration: none;" %>　
+            <%= link_to "Google Maps", art.location_link, :target=>["_blank"], style: "text-decoration: none;" %>　
+            <%= link_to "Street View", art.view_link, :target=>["_blank"], style: "text-decoration: none;" %>
+            <br>
+            <div class="d-flex justify-content-between align-items-center" style="margin-top:10px;">
+              <div class="btn-group">
+                <%= link_to 'Show', art, class: "btn btn-sm btn-outline-secondary" %>
+                <%= link_to 'Edit', edit_art_path(art), class: "btn btn-sm btn-outline-secondary" %>
+                <%= link_to 'Destroy', art, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-outline-secondary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <%= link_to 'New Art', new_art_path, class: "col-lg-12", class: "btn btn-outline-primary", style: "margin: 0 auto;" %>
+  </div>
+</div>
+<br>
+
 
 <%= link_to 'Edit', edit_artist_path(@artist) %> |
 <%= link_to 'Back', artists_path %>
