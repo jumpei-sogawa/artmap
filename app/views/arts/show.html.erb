@@ -49,7 +49,7 @@
 
 <p>
   <strong>Artist:</strong>
-  <%= link_to @art.artist.name, artist_path(@art.artist) %>
+  <%= link_to @art.artist.name, artist_path(@art.artist), style:"text-decoration:none;" %>
 </p>
 
 <p>
@@ -63,28 +63,33 @@
 </p>
 
 <p>
-  <strong>Image link:</strong>
-  <%= link_to "Google Arts & Culture", @art.image_link, :target=>["_blank"] %>
+  <% if @art.image_link = nil %>
+    <a href="https://artsandculture.google.com/" target="_blank" style="text-decoration:none;">Search in Google Arts & Culture</a>
+  <% else %>
+    <%= link_to "Image link", @art.image_link, :target=>["_blank"], style:"text-decoration:none;" %>
+  <% end %>
+</p>
+
+
+<p>
+  <% if @art.location_link = nil %>
+    <a href="https://www.google.co.jp/maps/" target="_blank" style="text-decoration:none;">Search in Google Maps</a>
+  <% else %>
+    <%= link_to "Opne in Google Maps", @art.location_link, :target=>["_blank"], style:"text-decoration:none;" %>
+    <strong>Latitude:</strong>
+    <%= @art.latitude %>
+    <strong>Longitude:</strong>
+    <%= @art.longitude %>
+  <% end %>
 </p>
 
 <p>
-  <strong>Location link:</strong>
-  <%= link_to "Location", @art.location_link, :target=>["_blank"] %>
-</p>
-
-<p>
-  <strong>Latitude:</strong>
-  <%= @art.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @art.longitude %>
-</p>
-
-<p>
-  <strong>View link:</strong>
-  <%= link_to "Street View", @art.view_link, :target=>["_blank"] %>
+  <strong>Street View</strong>
+  <% if @art.location_link = nil %>
+    <a href="https://www.google.co.jp/maps/" target="_blank" style="text-decoration:none;">Search in Google Maps</a>
+  <% else %>
+    <%= link_to "Open", @art.view_link, :target=>["_blank"], style:"text-decoration:none;" %>
+  <% end %>
 </p>
 
 <style type="text/css">
