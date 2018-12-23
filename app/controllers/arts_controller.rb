@@ -13,6 +13,8 @@ class ArtsController < ApplicationController
       @latitudes << art.latitude
       @longitudes << art.longitude
     end
+
+    @artists = Artist.all
   end
 
   # GET /arts/1

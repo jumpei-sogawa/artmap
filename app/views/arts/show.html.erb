@@ -9,7 +9,7 @@
         var transitLayer = new google.maps.TransitLayer();
         transitLayer.setMap(map);
 
-        var contentString = 'Address: <%= @address %>';
+        var contentString = '<%= @art.title %>, <%= @art.artist.name %>';
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
