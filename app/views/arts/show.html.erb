@@ -84,11 +84,11 @@
 </p>
 
 <p>
-  <strong>View link:</strong>
+  <strong>Street View</strong>
   <% if @art.location_link = nil %>
     <a href="https://www.google.co.jp/maps/" target="_blank" style="text-decoration:none;">Search in Google Maps</a>
   <% else %>
-    <%= link_to "Street View", @art.view_link, :target=>["_blank"], style:"text-decoration:none;" %>
+    <%= link_to "Open", @art.view_link, :target=>["_blank"], style:"text-decoration:none;" %>
   <% end %>
 </p>
 
