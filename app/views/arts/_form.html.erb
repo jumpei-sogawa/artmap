@@ -75,6 +75,24 @@
 
     <div class="form-group row">
       <div class="col-lg-1 offset-lg-2">
+        <%= form.label :latitude %>
+      </div>
+      <div class="col-lg-6">
+        <%= form.text_field :latitude, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
+        <%= form.label :longitude %>
+      </div>
+      <div class="col-lg-6">
+        <%= form.text_field :longitude, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-lg-1 offset-lg-2">
         <%= form.label :view_link %>
       </div>
       <div class="col-lg-6">
