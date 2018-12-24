@@ -111,8 +111,8 @@
   <div class="row">
     <% @arts.each do |art| %>
       <div class="col-lg-4">
-        <div class="card mb-4 shadow-sm">
-          <%= link_to art, style: "background-color: white;" do %>
+        <div class="card">
+          <%= link_to art do %>
             <%= image_tag art.image.to_s, class: "card-img-top" %>
           <% end %>
           <div class="card-body">
