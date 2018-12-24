@@ -37,7 +37,6 @@
       <%= image_tag @art.image.to_s, style:"width:100%;" %>
     </div>
     <div class="col-lg-2 offset-sm-1">
-      <br>
       <div style="font-size:25px;"><%= @art.title %></div>
       <%= @art.year %><br>
       <div style="font-size:20px;margin-top:5px;">
@@ -74,6 +73,14 @@
           <%= link_to "Open Street View", @art.view_link, :target=>["_blank"], style:"text-decoration:none;" %>
         <% end %>
       </div>
+
+      <br>
+
+      <div class="">
+        <%= link_to 'Edit', edit_art_path(@art), class: "btn btn-outline-secondary" %>
+        <%= link_to 'Home', arts_path, class: "btn btn-outline-secondary", style: "text-decoration:none;" %>
+      </div>
+
     </div>
   </div>
 
@@ -90,6 +97,4 @@
     <div id="map"></div>
   </div>
 </div>
-
-<%= link_to 'Edit', edit_art_path(@art) %> |
-<%= link_to 'Back', arts_path %>
+<br>
