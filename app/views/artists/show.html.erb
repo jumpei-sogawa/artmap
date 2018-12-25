@@ -50,7 +50,7 @@
 <div class="container-fluid" style="width:90%;">
   <div class="row">
     <div class="col-lg-12" style="font-size:30px;">
-      My Favorite Paintings' Location & Street View
+      <h1>My Favorite Paintings' Location & Street View</h1>
     </div>
   </div>
 
@@ -59,25 +59,29 @@
 
 
   <div class="row">
-    <div class="btn-group col-sm-3">
-      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="btn-group col-md-4">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:30px;">
         <%= @artist.name %>
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <% @artists.each do |artist| %>
-          <%= link_to artist.name, artist_path(artist), class: "dropdown-item" %>
+          <%= link_to artist.name, artist_path(artist), class: "dropdown-item", style:"font-size:30px;" %>
         <% end %>
         <div class="dropdown-divider"></div>
-        <%= link_to "All Artists", root_path, class: "dropdown-item" %>
+        <%= link_to "All Artists", root_path, class: "dropdown-item", style:"font-size:30px;" %>
       </div>
     </div>
 
-    <div class="col-sm-2">
+    <div class="col-md-3" style="margin-top:7px; font-size:30px;">
       <%= @artist.country %>
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-md-3" style="margin-top:7px; font-size:30px;">
       <%= @artist.birth %> - <%= @artist.death %>
+    </div>
+
+    <div class="col-md-2" style="margin-top:7px; font-size:30px;">
+      <%= link_to 'Edit', edit_artist_path(@artist), style: "color:gray; text-decoration:none;"  %>
     </div>
   </div>
 
@@ -105,33 +109,33 @@
 <div class="container-fluid" style="width:90%;">
   <div class="row">
     <% @arts.each do |art| %>
-      <div class="col-lg-4">
+      <div class="col-lg-4" style="margin-top:20px;">
         <div class="card mb-4 shadow-sm">
-          <%= link_to art, style: "background-color: white;" do %>
+          <%= link_to art do %>
             <%= image_tag art.image.to_s, class: "card-img-top" %>
           <% end %>
           <div class="card-body">
-            <div class="card-text" style="font-size:25px;">
-              <%= link_to art.title, art, style: "text-decoration: none;" %>
+            <div class="offset-sm-1">
+              <div class="card-text" style="font-size:25px;">
+                <%= link_to art.title, art, style: "text-decoration: none;" %>
+              </div>
+              <div class="card-text"><%= art.year %></div>
+              <div class="card-text" style="font-size:20px;margin-top:5px;">
+                <%= link_to art.artist.name, artist_path(art.artist), style: "text-decoration: none;" %>
+              </div>
+              <div class="card-text" style="margin-bottom:10px;">
+                <%= art.artist.country %>, <%= art.artist.birth %> - <%= art.artist.death %>
+              </div>
             </div>
-            <div class="card-text"><%= art.year %></div>
-            <div class="card-text" style="font-size:20px;margin-top:5px;">
-              <%= link_to art.artist.name, artist_path(art.artist), style: "text-decoration: none;" %>
-            </div>
-            <div class="card-text" style="margin-bottom:10px;">
-              <%= art.artist.country %>, <%= art.artist.birth %> - <%= art.artist.death %>
-            </div>
-            <%= link_to "Image", art.image_link, :target=>["_blank"], style: "text-decoration: none;" %>　
-            <%= link_to "Google Maps", art.location_link, :target=>["_blank"], style: "text-decoration: none;" %>　
-            <%= link_to "Street View", art.view_link, :target=>["_blank"], style: "text-decoration: none;" %>
-            <br>
-            <div class="d-flex justify-content-between align-items-center" style="margin-top:10px;">
+            <%= link_to "Google Maps", art.location_link, :target=>["_blank"], class:"col-sm-5 offset-sm-1 btn btn-primary", style: "text-decoration:none; font-size:20px;" %>
+            <%= link_to "Street View", art.view_link, :target=>["_blank"], class:"col-sm-4 offset-sm-1 btn btn-primary", style: "text-decoration:none; font-size:20px;" %>
+            <!-- <div class="d-flex justify-content-between align-items-center" style="margin-top:10px;">
               <div class="btn-group">
                 <%= link_to 'Show', art, class: "btn btn-sm btn-outline-secondary" %>
                 <%= link_to 'Edit', edit_art_path(art), class: "btn btn-sm btn-outline-secondary" %>
                 <%= link_to 'Destroy', art, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-outline-secondary" %>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -141,11 +145,16 @@
 
 <div class="container">
   <div class="row">
-    <%= link_to 'Post Painting', new_art_path, class: "col-lg-12", class: "btn btn-outline-primary", style: "margin: 0 auto;" %>
+    <button id="pagetop" class="btn btn-outline-primary" style="margin: 0 auto;">to Page Top</button>
   </div>
 </div>
 <br>
 
-
-<%= link_to 'Edit', edit_artist_path(@artist) %> |
-<%= link_to 'Back', artists_path %>
+<script type="text/javascript">
+  $(function(){
+      $('#pagetop').click(function () {
+          //id名#pagetopがクリックされたら、以下の処理を実行
+          $("html,body").animate({scrollTop:0},"300");
+      });
+  });
+</script>
