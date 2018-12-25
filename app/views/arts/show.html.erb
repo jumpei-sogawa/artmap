@@ -31,9 +31,9 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="container-fluid" style="width:90%;">
+<div class="container-fluid pc-width">
   <div class="row">
-    <div class="col-lg-6 offset-lg-3">
+    <div class="col-lg-6 offset-lg-3 mt-0 prl-0">
       <%= image_tag @art.image.to_s, style:"width:100%;" %>
     </div>
     <div class="col-lg-2 offset-sm-1">
@@ -96,7 +96,6 @@
       width: 100%;}
   </style>
   <div class="row">
-    <div id="map"></div>
+    <div id="map" class="pc-mb"></div>
   </div>
 </div>
-<br>

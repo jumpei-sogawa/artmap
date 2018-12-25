@@ -1,0 +1,26 @@
+// on PC
+@media screen and (min-width:1000px){
+  .pc-width{
+    width: 90%;
+  }
+
+  .pc-mb-30px{
+    margin-bottom: 30px;
+  }
+
+  .pc-mb{
+    margin-bottom: 20px;
+  }
+}
+
+// on mobile
+@media screen and (max-width:1000px){
+  .prl-0{
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .border-0px{
+    border: 0px;
+  }
+}
