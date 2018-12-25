@@ -31,14 +31,13 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="container">
+<div class="container-fluid" style="width:90%;">
   <div class="row">
     <div class="col-lg-6 offset-lg-3">
       <%= image_tag @art.image.to_s, style:"width:100%;" %>
     </div>
     <div class="col-lg-2 offset-sm-1">
-      <br>
-      <div style="font-size:25px;"><%= @art.title %></div>
+      <div style="font-size:25px; margin-top:5px;"><%= @art.title %></div>
       <%= @art.year %><br>
       <div style="font-size:20px;margin-top:5px;">
         <%= link_to @art.artist.name, artist_path(@art.artist), style:"text-decoration:none;" %>
@@ -47,33 +46,43 @@
         <%= @art.artist.country %>, <%= @art.artist.birth %> - <%= @art.artist.death %>
       </div>
 
-      <div class="" >
-        <% if @art.image_link = nil %>
+      <div class="" style="margin-bottom:5px;">
+        <% if @art.image_link == nil or @art.image_link == "" %>
           <a href="https://artsandculture.google.com/" target="_blank" style="text-decoration:none;">Search for Image in Google Arts & Culture</a>
         <% else %>
           <%= link_to "Open Image link", @art.image_link, :target=>["_blank"], style:"text-decoration:none;" %>
         <% end %>
       </div>
 
-      <div class="">
-        <% if @art.location_link = nil %>
-          <a href="https://www.google.co.jp/maps/" target="_blank" style="text-decoration:none;">Search in Google Maps</a>
+      <div class="" style="margin-bottom:5px;">
+        <% if @art.location_link == nil  or @art.location_link == "" %>
+          <%= link_to "Search in Google Maps", "https://www.google.co.jp/maps/", :target=>["_blank"], class:"btn btn-outline-primary", style: "text-decoration:none; font-size:20px;" %>
         <% else %>
-          <%= link_to "Opne Google Maps", @art.location_link, :target=>["_blank"], style:"text-decoration:none;" %>
-          <strong>Latitude:</strong>
-          <%= @art.latitude %>
-          <strong>Longitude:</strong>
-          <%= @art.longitude %>
+          <%= link_to "Google Maps", @art.location_link, :target=>["_blank"], class:"btn btn-primary", style: "text-decoration:none; font-size:20px;" %>
         <% end %>
       </div>
 
       <div class="">
-        <% if @art.location_link = nil %>
-          <a href="https://www.google.co.jp/maps/" target="_blank" style="text-decoration:none;">Search in Google Maps</a>
+        <% if @art.view_link == nil or @art.view_link == "" %>
+          <% if @art.location_link == nil or @art.location_link == "" %>
+            <%= link_to "Street View", "https://www.google.co.jp/maps/", :target=>["_blank"], class:"btn btn-outline-primary", style: "text-decoration:none; font-size:20px;" %>
+          <% else %>
+            <%= link_to "Street View", @art.location_link, :target=>["_blank"], class:"btn btn-outline-primary", style: "text-decoration:none; font-size:20px;" %>
+          <% end %>
         <% else %>
-          <%= link_to "Open Street View", @art.view_link, :target=>["_blank"], style:"text-decoration:none;" %>
+          <%= link_to "Street View", @art.view_link, :target=>["_blank"], class:"btn btn-primary", style: "text-decoration:none; font-size:20px;" %>
         <% end %>
       </div>
+
+      <div class="" style="margin-top:10px;">
+        <%= link_to 'Home', arts_path, class: "btn btn-outline-secondary", style: "text-decoration:none;" %>
+      </div>
+      <div class="" style="margin-top:10px;">
+        <%= link_to 'Edit', edit_art_path(@art), class: "btn btn-outline-secondary" %>
+        <%= link_to 'Delete', @art, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-secondary" %>
+      </div>
+
+
     </div>
   </div>
 
@@ -90,6 +99,4 @@
     <div id="map"></div>
   </div>
 </div>
-
-<%= link_to 'Edit', edit_art_path(@art) %> |
-<%= link_to 'Back', arts_path %>
+<br>

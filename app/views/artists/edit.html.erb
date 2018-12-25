@@ -2,5 +2,10 @@
 
 <%= render 'form', artist: @artist %>
 
-<%= link_to 'Show', @artist %> |
-<%= link_to 'Back', artists_path %>
+<div class="container-fluid">
+  <div class="form-group row">
+    <div class="col-lg-6 offset-lg-3">
+      <%= link_to 'Back', @artist, class: "col-lg-2 btn btn-outline-secondary", style: "text-decoration:none;" %>
+    </div>
+  </div>
+</div>

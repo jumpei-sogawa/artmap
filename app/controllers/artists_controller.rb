@@ -10,7 +10,7 @@ class ArtistsController < ApplicationController
   # GET /artists/1
   # GET /artists/1.json
   def show
-    @arts = @artist.arts
+    @arts = @artist.arts.order("id DESC")
     @artists = Artist.all
   end
 
