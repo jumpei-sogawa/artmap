@@ -41,7 +41,8 @@ class ArtsController < ApplicationController
   # POST /arts.json
   def create
     @art = Art.new(art_params)
-
+    @art.geocode
+    
     respond_to do |format|
       if @art.save
         format.html { redirect_to @art, notice: 'Art was successfully created.' }
