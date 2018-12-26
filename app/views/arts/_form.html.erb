@@ -13,32 +13,32 @@
     <% end %>
 
     <div class="form-group row">
-      <div class="col-lg-1 offset-lg-2">
+      <div class="col-lg-2 offset-lg-1 mt-2 text-lg-right">
         <%= form.label :title %>
       </div>
       <div class="col-lg-3">
-        <%= form.text_field :title, class: "form-control" %>
+        <%= form.text_field :title, class: "form-control", placeholder: "Title (e.g. The Saint-Lazare Station)" %>
       </div>
-      <div class="col-lg-1">
+      <div class="col-lg-1 mt-2 text-lg-right">
         <%= form.label :year %>
       </div>
       <div class="col-lg-2">
-        <%= form.number_field :year, class: "form-control" %>
+        <%= form.number_field :year, class: "form-control", placeholder: "1916", value: 1877 %>
       </div>
     </div>
 
     <div class="form-group row">
-      <div class="col-lg-1 offset-lg-2">
+      <div class="col-lg-2 offset-lg-1 text-lg-right">
         <%= form.label :artist_id %>
       </div>
       <div class="col-lg-2">
         <%= form.select :artist_id, @artists.map{|artist| [artist.name, artist.id]}, class: "form-control" %>
       </div>
-      <%= link_to 'Add Artist', new_artist_path, class: "col-lg-1", style: "text-decoration:none;" %>
+      <%= link_to 'Add Artist', new_artist_path, class: "col-lg-2", style: "text-decoration:none;" %>
     </div>
 
     <div class="form-group row">
-      <div class="col-lg-1 offset-lg-2">
+      <div class="col-lg-2 offset-lg-1 text-lg-right">
         <%= form.label :image %>
       </div>
       <div class="col-lg-6">
@@ -47,25 +47,16 @@
     </div>
 
     <div class="form-group row">
-      <div class="col-lg-1 offset-lg-2">
-        <%= form.label :image_link %>
+      <div class="col-lg-2 offset-lg-1 mt-2 text-lg-right">
+        Link to Google Maps
       </div>
       <div class="col-lg-6">
-        <%= form.text_field :image_link, class: "form-control" %>
+        <%= form.text_field :location_link, class: "form-control", placeholder: "Link to Google Maps" %>
       </div>
     </div>
 
-    <div class="form-group row">
-      <div class="col-lg-1 offset-lg-2">
-        <%= form.label :location_link %>
-      </div>
-      <div class="col-lg-6">
-        <%= form.text_field :location_link, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class="col-lg-1 offset-lg-2">
+    <!-- <div class="form-group row">
+      <div class="col-lg-2 offset-lg-1 mt-2 text-lg-right">
         <%= form.label :address %>
       </div>
       <div class="col-lg-6">
@@ -74,7 +65,7 @@
     </div>
 
     <div class="form-group row">
-      <div class="col-lg-1 offset-lg-2">
+      <div class="col-lg-2 offset-lg-1 mt-2 text-lg-right">
         <%= form.label :latitude %>
       </div>
       <div class="col-lg-6">
@@ -83,20 +74,29 @@
     </div>
 
     <div class="form-group row">
-      <div class="col-lg-1 offset-lg-2">
+      <div class="col-lg-2 offset-lg-1 mt-2 text-lg-right">
         <%= form.label :longitude %>
       </div>
       <div class="col-lg-6">
         <%= form.text_field :longitude, class: "form-control" %>
       </div>
+    </div> -->
+
+    <div class="form-group row">
+      <div class="col-lg-2 offset-lg-1 mt-2 text-lg-right">
+        Link to Street View
+      </div>
+      <div class="col-lg-6">
+        <%= form.text_field :view_link, class: "form-control", placeholder: "Link to Street View" %>
+      </div>
     </div>
 
     <div class="form-group row">
-      <div class="col-lg-1 offset-lg-2">
-        <%= form.label :view_link %>
+      <div class="col-lg-2 offset-lg-1 mt-2 text-lg-right">
+        Link to Image Site
       </div>
       <div class="col-lg-6">
-        <%= form.text_field :view_link, class: "form-control" %>
+        <%= form.text_field :image_link, class: "form-control", placeholder: "Link to Image Site" %>
       </div>
     </div>
 
