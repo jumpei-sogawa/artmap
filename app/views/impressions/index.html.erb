@@ -1,0 +1,86 @@
+<h1>Impressions#index</h1>
+<p>Find me in app/views/impressions/index.html.erb</p>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>controller_name</th>
+      <th>action_name</th>
+      <th>impressionable_id</th>
+      <th>Label</th>
+      <th></th>
+      <th>PV</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>arts</td>
+      <td>index</td>
+      <td></td>
+      <td>Home</td>
+      <td></td>
+      <td><%= @impressions_arts.size %></td>
+    </tr>
+
+    <%# arts#showの各ページのPV数 %>
+    <% for i in 1..@arts.maximum(:id) do %>
+      <% if @arts.exists?(id: i) %>
+        <% art = @arts.find(i) %>
+        <tr>
+          <td>arts</td>
+          <td>show</td>
+          <td><%= i %></td>
+          <td><%= art.artist.name %></td>
+          <td><%= art.title %></td>
+          <% a = @impressions_art.where(impressionable_id: i).size %>
+          <td><%=  a %></td>
+
+
+        </tr>
+      <% end %>
+    <% end %>
+
+    <%# arts#showのPV数のartistごとの合計 %>
+    <%# 計算 %>
+    <% artist = [] %>
+    <% for i in 1..@artists.maximum(:id) do %>
+      <% artist[i] = [] %>
+    <% end %>
+
+    <% for i in 1..@arts.maximum(:id) do %>
+      <% if @arts.exists?(id: i) %>
+        <% art = @arts.find(i) %>
+        <% artist[art.artist.id] << @impressions_art.where(impressionable_id: i).size %>
+      <% end %>
+    <% end %>
+
+    <%# 表示 %>
+    <% for i in 1..@artists.maximum(:id) do %>
+      <% if @artists.exists?(id: i) %>
+        <tr>
+          <td>arts</td>
+          <td>show</td>
+          <td>per artist</td>
+          <td><%= @artists.find(i).name %></td>
+          <td>Total</td>
+          <td><%= artist[i].sum %></td>
+        </tr>
+      <% end %>
+    <% end %>
+
+    <%# そのartistでソートされた回数 %>
+    <% for i in 1..@impressions_artist.maximum(:impressionable_id) do %>
+    <tr>
+      <td>artists</td>
+      <td>show</td>
+      <td><%= i %></td>
+      <td><%= @artists.find(i).name %></td>
+      <td>search</td>
+      <td><%= @impressions_artist.where(impressionable_id: i).size %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
