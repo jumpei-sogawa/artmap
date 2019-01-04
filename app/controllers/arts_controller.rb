@@ -25,8 +25,6 @@ class ArtsController < ApplicationController
     @address = @art.address
     @latitude = @art.latitude
     @longitude = @art.longitude
-
-    impressionist(@art)
   end
 
   # GET /arts/new
