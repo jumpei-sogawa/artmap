@@ -84,3 +84,36 @@
     <% end %>
   </tbody>
 </table>
+
+
+<br>
+<br>
+<br>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>controller_name</th>
+      <th>action_name</th>
+      <th>impressionable_id</th>
+      <th>request_hash</th>
+      <th>ip_address</th>
+      <th>session_hash</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @impressions_art.each do |art| %>
+      <tr>
+        <td><%= art.controller_name %></td>
+        <td><%= art.action_name %></td>
+        <td><%= art.impressionable_id %></td>
+        <td><%= art.request_hash %></td>
+        <td><%= art.ip_address %></td>
+        <td><%= art.session_hash %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
