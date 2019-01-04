@@ -78,7 +78,7 @@
         <% art = @arts.find(i) %>
         <% artist[art.artist.id] << @impressions_art.where(impressionable_id: i).size %>
         <% brtist[art.artist.id] << @impressions_art.where(impressionable_id: i, ip_address: "175.177.119.139").size %>
-        <% crtist[art.artist.id] << @impressions_art.where(impressionable_id: i, ip_address: "175.177.119.139").size %>
+        <% crtist[art.artist.id] << @impressions_art.where(impressionable_id: i, ip_address: "182.251.56.117").size %>
       <% end %>
     <% end %>
 
