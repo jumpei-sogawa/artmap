@@ -3,6 +3,8 @@ class Art < ApplicationRecord
   mount_uploader :image, ImageUploader
   # geocoded_by :address
   # after_validation :geocode
+  is_impressionable
+
 
   def geocode
     location_link = self.location_link
