@@ -1,5 +1,6 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: [:show, :edit, :update, :destroy]
+  impressionist :actions=> [:index, :show]
 
   # GET /arts
   # GET /arts.json
@@ -24,6 +25,8 @@ class ArtsController < ApplicationController
     @address = @art.address
     @latitude = @art.latitude
     @longitude = @art.longitude
+
+    impressionist(@art)
   end
 
   # GET /arts/new
@@ -42,7 +45,7 @@ class ArtsController < ApplicationController
   def create
     @art = Art.new(art_params)
     @art.geocode
-    
+
     respond_to do |format|
       if @art.save
         format.html { redirect_to @art, notice: 'Art was successfully created.' }
