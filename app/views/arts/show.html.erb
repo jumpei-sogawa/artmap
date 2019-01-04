@@ -92,6 +92,3 @@
     <div id="map" class="pc-mb-20px map-height"></div>
   </div>
 </div>
-
-PV数：<%=  @art.impressionist_count %>
-PV数：<%=  Impression.where(controller_name: :arts, action_name: :show, impressionable_id: @art.id).size %>
