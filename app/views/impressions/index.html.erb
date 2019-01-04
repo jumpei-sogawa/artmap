@@ -5,16 +5,32 @@
 <table>
   <thead>
     <tr>
-      <th>controller_name</th>
-      <th>action_name</th>
-      <th>impressionable_id</th>
-      <th>Label</th>
-      <th></th>
-      <th>PV</th>
+      <th>[]controller_name</th>
+      <th>[]action_name</th>
+      <th>[]impressionable_id</th>
+      <th>[]Label</th>
+      <th>[]</th>
+      <th>[]PV_all</th>
+      <th>[]PV_from_175.177.119.139</th>
+      <th>[]PV_from_182.251.56.117</th>
+      <th>[]Others</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Home Wi-Fi</th>
+      <th>iPhone</th>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
       <td>arts</td>
@@ -22,7 +38,10 @@
       <td></td>
       <td>Home</td>
       <td></td>
-      <td><%= @impressions_arts.size %></td>
+      <td><%= a = @impressions_arts.size %></td>
+      <td><%= b = @impressions_arts.where(ip_address: "175.177.119.139").size %></td>
+      <td><%= c = @impressions_arts.where(ip_address: "182.251.56.117").size %></td>
+      <td><%= a-b-c %></td>
     </tr>
 
     <%# arts#showの各ページのPV数 %>
@@ -35,10 +54,10 @@
           <td><%= i %></td>
           <td><%= art.artist.name %></td>
           <td><%= art.title %></td>
-          <% a = @impressions_art.where(impressionable_id: i).size %>
-          <td><%=  a %></td>
-
-
+          <td><%= a = @impressions_art.where(impressionable_id: i).size %></td>
+          <td><%= b = @impressions_art.where(impressionable_id: i, ip_address: "175.177.119.139").size %></td>
+          <td><%= c = @impressions_art.where(impressionable_id: i, ip_address: "182.251.56.117").size %></td>
+          <td><%= a-b-c %></td>
         </tr>
       <% end %>
     <% end %>
@@ -46,14 +65,20 @@
     <%# arts#showのPV数のartistごとの合計 %>
     <%# 計算 %>
     <% artist = [] %>
+    <% brtist = [] %>
+    <% crtist = [] %>
     <% for i in 1..@artists.maximum(:id) do %>
       <% artist[i] = [] %>
+      <% brtist[i] = [] %>
+      <% crtist[i] = [] %>
     <% end %>
 
     <% for i in 1..@arts.maximum(:id) do %>
       <% if @arts.exists?(id: i) %>
         <% art = @arts.find(i) %>
         <% artist[art.artist.id] << @impressions_art.where(impressionable_id: i).size %>
+        <% brtist[art.artist.id] << @impressions_art.where(impressionable_id: i, ip_address: "175.177.119.139").size %>
+        <% crtist[art.artist.id] << @impressions_art.where(impressionable_id: i, ip_address: "175.177.119.139").size %>
       <% end %>
     <% end %>
 
@@ -66,7 +91,10 @@
           <td>per artist</td>
           <td><%= @artists.find(i).name %></td>
           <td>Total</td>
-          <td><%= artist[i].sum %></td>
+          <td><%= a = artist[i].sum %></td>
+          <td><%= b = brtist[i].sum %></td>
+          <td><%= c = crtist[i].sum %></td>
+          <td><%= a-b-c %></td>
         </tr>
       <% end %>
     <% end %>
@@ -79,7 +107,10 @@
       <td><%= i %></td>
       <td><%= @artists.find(i).name %></td>
       <td>search</td>
-      <td><%= @impressions_artist.where(impressionable_id: i).size %></td>
+      <td><%= a = @impressions_artist.where(impressionable_id: i).size %></td>
+      <td><%= b = @impressions_artist.where(impressionable_id: i, ip_address: "175.177.119.139").size %></td>
+      <td><%= c = @impressions_artist.where(impressionable_id: i, ip_address: "182.251.56.117").size %></td>
+      <td><%= a-b-c %></td>
     </tr>
     <% end %>
   </tbody>
