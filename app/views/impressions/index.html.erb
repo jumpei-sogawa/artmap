@@ -144,9 +144,17 @@
         <td class="text-center"><%= art.controller_name %></td>
         <td><%= art.action_name %></td>
         <td><%= art.impressionable_id %></td>
-        <td>[]<%= art.request_hash.truncate(20) %></td>
+        <% if art.request_hash.exists? %>
+          <td>[]<%= art.request_hash.truncate(20) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td>[]<%= art.ip_address %></td>
-        <td>[]<%= art.session_hash.truncate(20) %></td>
+        <% if art.request_hash.exists? %>
+          <td>[]<%= art.session_hash.truncate(20) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td>[]<%= art.created_at.in_time_zone('Tokyo') %></td>
       </tr>
     <% end %>
