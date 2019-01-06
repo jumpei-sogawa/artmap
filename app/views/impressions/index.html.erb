@@ -101,17 +101,19 @@
 
     <%# そのartistでソートされた回数 %>
     <% for i in 1..@impressions_artist.maximum(:impressionable_id) do %>
-    <tr>
-      <td class="text-center">artists</td>
-      <td>show</td>
-      <td><%= i %></td>
-      <td><%= @artists.find(i).name %></td>
-      <td>search</td>
-      <td><%= a = @impressions_artist.where(impressionable_id: i).size %></td>
-      <td><%= b = @impressions_artist.where(impressionable_id: i, ip_address: "175.177.119.139").size %></td>
-      <td><%= c = @impressions_artist.where(impressionable_id: i, ip_address: "182.251.56.117").size %></td>
-      <td><%= a-b-c %></td>
-    </tr>
+      <% if @artists.exists?(id: i) %>
+        <tr>
+          <td class="text-center">artists</td>
+          <td>show</td>
+          <td><%= i %></td>
+          <td><%= @artists.find(i).name %></td>
+          <td>search</td>
+          <td><%= a = @impressions_artist.where(impressionable_id: i).size %></td>
+          <td><%= b = @impressions_artist.where(impressionable_id: i, ip_address: "175.177.119.139").size %></td>
+          <td><%= c = @impressions_artist.where(impressionable_id: i, ip_address: "182.251.56.117").size %></td>
+          <td><%= a-b-c %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
