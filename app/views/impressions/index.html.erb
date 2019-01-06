@@ -150,7 +150,7 @@
           <td></td>
         <% end %>
         <td>[]<%= art.ip_address %></td>
-        <% if art.request_hash.present? %>
+        <% if art.session_hash.present? %>
           <td>[]<%= art.session_hash.truncate(20) %></td>
         <% else %>
           <td></td>
