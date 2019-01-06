@@ -144,13 +144,13 @@
         <td class="text-center"><%= art.controller_name %></td>
         <td><%= art.action_name %></td>
         <td><%= art.impressionable_id %></td>
-        <% if art.request_hash.exists? %>
+        <% if art.request_hash.present? %>
           <td>[]<%= art.request_hash.truncate(20) %></td>
         <% else %>
           <td></td>
         <% end %>
         <td>[]<%= art.ip_address %></td>
-        <% if art.request_hash.exists? %>
+        <% if art.request_hash.present? %>
           <td>[]<%= art.session_hash.truncate(20) %></td>
         <% else %>
           <td></td>
