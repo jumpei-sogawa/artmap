@@ -101,17 +101,19 @@
 
     <%# そのartistでソートされた回数 %>
     <% for i in 1..@impressions_artist.maximum(:impressionable_id) do %>
-    <tr>
-      <td class="text-center">artists</td>
-      <td>show</td>
-      <td><%= i %></td>
-      <td><%= @artists.find(i).name %></td>
-      <td>search</td>
-      <td><%= a = @impressions_artist.where(impressionable_id: i).size %></td>
-      <td><%= b = @impressions_artist.where(impressionable_id: i, ip_address: "175.177.119.139").size %></td>
-      <td><%= c = @impressions_artist.where(impressionable_id: i, ip_address: "182.251.56.117").size %></td>
-      <td><%= a-b-c %></td>
-    </tr>
+      <% if @artists.exists?(id: i) %>
+        <tr>
+          <td class="text-center">artists</td>
+          <td>show</td>
+          <td><%= i %></td>
+          <td><%= @artists.find(i).name %></td>
+          <td>search</td>
+          <td><%= a = @impressions_artist.where(impressionable_id: i).size %></td>
+          <td><%= b = @impressions_artist.where(impressionable_id: i, ip_address: "175.177.119.139").size %></td>
+          <td><%= c = @impressions_artist.where(impressionable_id: i, ip_address: "182.251.56.117").size %></td>
+          <td><%= a-b-c %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
@@ -142,10 +144,18 @@
         <td class="text-center"><%= art.controller_name %></td>
         <td><%= art.action_name %></td>
         <td><%= art.impressionable_id %></td>
-        <td>[]<%= art.request_hash.truncate(20) %></td>
+        <% if art.request_hash.present? %>
+          <td>[]<%= art.request_hash.truncate(20) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td>[]<%= art.ip_address %></td>
-        <td>[]<%= art.session_hash.truncate(20) %></td>
-        <td>[]<%= art.created_at.in_time_zone('Tokyo') %></td>
+        <% if art.session_hash.present? %>
+          <td>[]<%= art.session_hash.truncate(20) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td style="width:250px;">[]<%= art.created_at.in_time_zone('Tokyo') %></td>
       </tr>
     <% end %>
   </tbody>
