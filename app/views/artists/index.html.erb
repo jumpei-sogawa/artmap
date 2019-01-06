@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>Name</th>
       <th>Country</th>
       <th>Birth</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @artists.each do |artist| %>
       <tr>
+        <td><%= artist.id %></td>
         <td><%= artist.name %></td>
         <td><%= artist.country %></td>
         <td><%= artist.birth %></td>
