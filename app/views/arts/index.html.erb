@@ -14,9 +14,8 @@
       transitLayer.setMap(map);
 
       <% @arts.each do |art| %>
-        <% unless art.address == '' %>
-        <% unless art.latitude == 'nil' %>
-        <% unless art.longitude == 'nil' %>
+        <% if art.latitude.present? %>
+        <% if art.longitude.present? %>
           contentString = '<%= art.title %>, <%= art.artist.name %>';
           infoWindow = new google.maps.InfoWindow({
               content: contentString
@@ -37,15 +36,14 @@
             infoWindow.open(map, marker);
           }, false);
 
-          // marker.addListener('click', () => { // マーカーをクリックしたとき
-
-          // }, false);
-
           //OUT
           marker.addListener('mouseout', () => {
             infoWindow.close();
           }, false);
-        <% end %>
+
+          marker.addListener('click', () => {
+              infoWindow.open(map, marker);
+          });
         <% end %>
         <% end %>
       <% end %>
