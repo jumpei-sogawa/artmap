@@ -42,7 +42,7 @@ class ArtsController < ApplicationController
   # POST /arts.json
   def create
     @art = Art.new(art_params)
-    @art.geocode
+    @art.geocoded_by_strv
 
     respond_to do |format|
       if @art.save
@@ -58,6 +58,8 @@ class ArtsController < ApplicationController
   # PATCH/PUT /arts/1
   # PATCH/PUT /arts/1.json
   def update
+    @art.geocoded_by_strv
+    
     respond_to do |format|
       if @art.update(art_params)
         format.html { redirect_to @art, notice: 'Art was successfully updated.' }
