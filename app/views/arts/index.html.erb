@@ -1,8 +1,8 @@
 <script type="text/javascript">
-  var contentString;
-  var infoWindow;
-  var position;
-  var marker;
+  var contentString = [];
+  var infoWindow = [];
+  var position = [];
+  var marker = [];
   function initMap() {
 
       var center = {lat: <%= @arts.average(:latitude) %>, lng: <%= @arts.average(:longitude) %>};
@@ -13,40 +13,42 @@
       var transitLayer = new google.maps.TransitLayer();
       transitLayer.setMap(map);
 
-      <% @arts.each do |art| %>
-        <% unless art.address == '' %>
-        <% unless art.latitude == 'nil' %>
-        <% unless art.longitude == 'nil' %>
-          contentString = '<%= art.title %>, <%= art.artist.name %>';
-          infoWindow = new google.maps.InfoWindow({
-              content: contentString
-          });
+      <% for i in 1..@arts.maximum(:id) do %>
+        var i = <%= i %>;
+        <% if @arts.exists?(id: i) %>
+          <% art = @arts.find(i) %>
+          <% if art.latitude.present? %>
+          <% if art.longitude.present? %>
+            contentString[i] = '<%= art.title %>, <%= art.artist.name %>';
+            infoWindow[i] = new google.maps.InfoWindow({
+                content: contentString[i]
+            });
 
-          position = {
-            lat: <%= art.latitude %>,
-            lng: <%= art.longitude %>
-          }
-          marker = new google.maps.Marker({
-              position:position,
-              map: map,
-              title: contentString
-          });
+            position[i] = {
+              lat: <%= art.latitude %>,
+              lng: <%= art.longitude %>
+            }
+            marker[i] = new google.maps.Marker({
+                position: position[i],
+                map: map,
+                title: contentString[i]
+            });
 
-          //ON
-          marker.addListener('mouseover', () => {
-            infoWindow.open(map, marker);
-          }, false);
+            //ON
+            // marker[i].addListener('mouseover', () => {
+            //   infoWindow[i].open(map, marker[i]);
+            // }, false);
 
-          // marker.addListener('click', () => { // マーカーをクリックしたとき
+            //OUT
+            // marker[i].addListener('mouseout', () => {
+            //   infoWindow[i].close();
+            // }, false);
 
-          // }, false);
-
-          //OUT
-          marker.addListener('mouseout', () => {
-            infoWindow.close();
-          }, false);
-        <% end %>
-        <% end %>
+            // marker[i].addListener('click', () => {
+            //     infoWindow[i].open(map, marker[i]);
+            // });
+          <% end %>
+          <% end %>
         <% end %>
       <% end %>
   }
