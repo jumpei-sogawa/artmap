@@ -14,7 +14,7 @@
 
     <div class="form-group row">
       <div class="col-lg-2 offset-lg-1 mt-2 text-lg-right">
-        <%= form.label :title %>
+        * <%= form.label :title %>
       </div>
       <div class="col-lg-3">
         <%= form.text_field :title, class: "form-control", placeholder: "Title (e.g. The Saint-Lazare Station)" %>
@@ -29,7 +29,7 @@
 
     <div class="form-group row">
       <div class="col-lg-2 offset-lg-1 text-lg-right">
-        <%= form.label :artist_id %>
+        * <%= form.label :artist_id %>
       </div>
       <div class="col-lg-2">
         <%= form.select :artist_id, @artists.map{|artist| [artist.name, artist.id]}, class: "form-control" %>
