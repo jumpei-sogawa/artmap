@@ -1,7 +1,11 @@
 <h1>Impressions#index</h1>
 <p>Find me in app/views/impressions/index.html.erb</p>
 
-
+<% imp_all = Impression.all %>
+<% visit_num = imp_all.pluck(:ip_address).uniq.size %>
+<< <%= visit_num %> >> people visited this site.
+<br>
+<br>
 <table>
   <thead>
     <tr>
@@ -139,7 +143,7 @@
   </thead>
 
   <tbody>
-    <% Impression.all.order(id: "DESC").each do |art| %>
+    <% imp_all.order(id: "DESC").each do |art| %>
       <% unless art.ip_address == "175.177.119.139" || art.ip_address == "182.251.56.117" %>
         <tr>
           <td class="text-center"><%= art.controller_name %></td>
