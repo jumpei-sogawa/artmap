@@ -59,23 +59,27 @@
 
 
 
-<p id="notice"><%= notice %></p>id
+<p id="notice"><%= notice %></p>
 
 
 <div class="container-fluid pc-width">
   <div class="row">
-    <div class="col-lg-9">
-      <h1>Street View & Location of My Favorite Paintings</h1>
+    <div class="col-lg-3">
+      <%= link_to root_path do %>
+        <h1 class="home">artmap</h1>
+      <% end %>
+    </div>
+    <div class="col-lg-6">
     </div>
     <div class="col-lg-3">
-      <a href="https://youtu.be/JVDTvAaums0" target="_blank"><h2 class="pt-2">How to use this site</h2></a>
+      <a href="https://youtu.be/JVDTvAaums0" target="_blank"><h2 class="pt-2 td-n">How to use this site</h2></a>
     </div>
   </div>
 
   <br>
 
   <div class="row">
-    <div class="btn-group col-sm-3">
+    <div class="btn-group col-sm-4">
       <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:30px;">
         All Artists
       </button>
@@ -131,8 +135,7 @@
                 <%= art.artist.country %>, <%= art.artist.birth %> - <%= art.artist.death %>
               </div>
             </div>
-            <%= link_to "Google Maps", art.location_link, :target=>["_blank"], class:"col-sm-5 offset-sm-1 btn btn-primary", style: "text-decoration:none; font-size:22px;" %>
-            <%= link_to "Street View", art.view_link, :target=>["_blank"], class:"col-sm-4 offset-sm-1 btn btn-primary", style: "text-decoration:none; font-size:22px;" %>
+            <%= link_to "Street View", art.view_link, :target=>["_blank"], class:"col-sm-8 offset-sm-2 btn btn-primary", style: "text-decoration:none; font-size:22px;" %>
             <!-- <div class="d-flex justify-content-between align-items-center" style="margin-top:10px;">
               <div class="btn-group">
                 <%= link_to 'Show', art, class: "btn btn-sm btn-outline-secondary" %>
