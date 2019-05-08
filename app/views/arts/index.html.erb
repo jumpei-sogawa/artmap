@@ -1,8 +1,4 @@
 <script type="text/javascript">
-  var contentString = [];
-  var infoWindow = [];
-  var position = [];
-  var marker = [];
   function initMap() {
 
       var center = {lat: <%= @arts.average(:latitude) %>, lng: <%= @arts.average(:longitude) %>};
@@ -13,44 +9,48 @@
       var transitLayer = new google.maps.TransitLayer();
       transitLayer.setMap(map);
 
-      <% for i in 1..@arts.maximum(:id) do %>
-        var i = <%= i %>;
-        <% if @arts.exists?(id: i) %>
-          <% art = @arts.find(i) %>
-          <% if art.latitude.present? %>
-          <% if art.longitude.present? %>
-            contentString[i] = '<%= art.title %>, <%= art.artist.name %>';
-            infoWindow[i] = new google.maps.InfoWindow({
-                content: contentString[i]
-            });
 
-            position[i] = {
-              lat: <%= art.latitude %>,
-              lng: <%= art.longitude %>
-            }
-            marker[i] = new google.maps.Marker({
-                position: position[i],
-                map: map,
-                title: contentString[i]
-            });
-
-            //ON
-            // marker[i].addListener('mouseover', () => {
-            //   infoWindow[i].open(map, marker[i]);
-            // }, false);
-
-            //OUT
-            // marker[i].addListener('mouseout', () => {
-            //   infoWindow[i].close();
-            // }, false);
-
-            // marker[i].addListener('click', () => {
-            //     infoWindow[i].open(map, marker[i]);
-            // });
-          <% end %>
-          <% end %>
+      const arts = [
+        <% @arts.each do |art| %>
+          {
+            id: <%= art.id %>,
+            latitude: <%= art.latitude %>,
+            longitude: <%= art.longitude %>,
+            title: "<%= art.title %>",
+            artist: "<%= art.artist.name %>",
+          },
         <% end %>
-      <% end %>
+      ]
+
+      arts.forEach(function (art){
+        var contentString = art.title + ', ' + art.artist
+        var infoWindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        var position = {
+          lat: art.latitude,
+          lng: art.longitude
+        }
+        var marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: contentString
+        });
+
+        // ON
+        marker.addListener('mouseover', () => {
+          infoWindow.open(map, marker);
+        }, false);
+
+        // OUT
+        marker.addListener('mouseout', () => {
+          infoWindow.close();
+        }, false);
+
+        marker.addListener('click', () => {
+          location.href = "arts/" + art.id
+        });
+      });
   }
 </script>
 <script async defer
@@ -64,18 +64,22 @@
 
 <div class="container-fluid pc-width">
   <div class="row">
-    <div class="col-lg-9">
-      <h1>Street View & Location of My Favorite Paintings</h1>
+    <div class="col-lg-3">
+      <%= link_to root_path do %>
+        <h1 class="home">artmap</h1>
+      <% end %>
+    </div>
+    <div class="col-lg-6">
     </div>
     <div class="col-lg-3">
-      <a href="https://youtu.be/JVDTvAaums0" target="_blank"><h2 class="pt-2">How to use this site</h2></a>
+      <a href="https://youtu.be/JVDTvAaums0" target="_blank"><h2 class="pt-2 td-n">How to use this site</h2></a>
     </div>
   </div>
 
   <br>
 
   <div class="row">
-    <div class="btn-group col-sm-3">
+    <div class="btn-group col-sm-4">
       <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:30px;">
         All Artists
       </button>
@@ -131,8 +135,7 @@
                 <%= art.artist.country %>, <%= art.artist.birth %> - <%= art.artist.death %>
               </div>
             </div>
-            <%= link_to "Google Maps", art.location_link, :target=>["_blank"], class:"col-sm-5 offset-sm-1 btn btn-primary", style: "text-decoration:none; font-size:22px;" %>
-            <%= link_to "Street View", art.view_link, :target=>["_blank"], class:"col-sm-4 offset-sm-1 btn btn-primary", style: "text-decoration:none; font-size:22px;" %>
+            <%= link_to "Street View", art.view_link, :target=>["_blank"], class:"col-sm-8 offset-sm-2 btn btn-primary", style: "text-decoration:none; font-size:22px;" %>
             <!-- <div class="d-flex justify-content-between align-items-center" style="margin-top:10px;">
               <div class="btn-group">
                 <%= link_to 'Show', art, class: "btn btn-sm btn-outline-secondary" %>
